@@ -1,64 +1,85 @@
-# 《一次转发的半径》
+# Radius of a Single Share
 
-> 网络文明主题设计比赛参赛作品 · 生成艺术海报
-> 立意：**转发即扩散，理性是防火墙**
+English | [中文](README.zh-CN.md)
 
-## 概念
+**《一次转发的半径》** — a generative-art poster rendered *entirely* from real rumor-propagation simulation data. Nothing in the two radial bursts below is hand-drawn: propagation behavior is calibrated by locally-hosted LLM persona agents, the rumor spreads through a 3,000-node scale-free social network, and official debunking fights back in real time.
 
-海报画面不是"画"出来的，而是由**真实的谣言传播仿真数据**渲染生成：
-以谣言源头为圆心，每一次"转发"向外生长出一圈枝蔓——这就是"一次转发的半径"。
+![Poster — Radius of a Single Share](release/《一次转发的半径》25工设实验张子睿.png)
 
-双联对比（同一网络、同一谣言随机流）：
+> **Thesis: every share is a transmission event; rationality is the firewall.**
+> 转发即扩散，理性是防火墙。
 
-- **A 组 · 无辟谣**：枝蔓疯狂扩张到网络边缘，橙红、灼热；
-- **B 组 · 辟谣介入**：官方辟谣号上线后，真相与谣言竞争传播，枝蔓明显收缩，蓝色、清朗。
+## What you are looking at
 
-## 仿真模型（两层架构）
+Each radial burst is a **propagation tree**: the rumor source sits at the center, and every "share" grows one ring outward. The title is literal — the artwork measures the *radius of a single share*.
 
-**Layer 2 · LLM 多智能体行为校准**（`src/llm_calibration.py`，MAVIS 思路）
+- **Upper · "The Outbreak" (no debunking)** — a rumor tree of 2,335 shares blazes outward: center white-hot, tips deep red, 13 rings of uncontrolled growth.
+- **Lower · "The Contained Radius" (debunking at t = 6)** — six golden-ringed official sources bloom a blue truth tree that surrounds the truncated, faded rumor remnants.
 
-- 24 名带人设的虚拟网民（媒介素养 × 情绪 × 社交习惯 × 身份），经本地 Ollama
-  大模型（qwen3:4b-instruct-2507）对**虚构**校园谣言做两轮决策实验：
-  - 第一轮：低素养人群转发率 **50%**，高素养人群 **0%**（全部选择质疑求证）
-  - 第二轮：见过官方通报后，6/6 转发者全部转为**转发辟谣**
-- 行为差异按"总量守恒缩放"注入 3000 节点：异质性来自实验，整体节奏来自 config
+## How it works — a two-layer pipeline
 
-**Layer 1 · 网络传播仿真**（`src/simulate.py`）
+### Layer 2 · LLM agent calibration — `src/llm_calibration.py`
 
-- BA 无标度社交网络（N=3000, m=3），谣言源头为普通用户（度≈24）——"任何人的一次转发"
-- MT 谣言传播模型变体 + 真相竞争传播：
-  - 易感者 I → 谣言传播者 S（发送者节点传播倾向 λ_u，由 Layer 2 校准）→ 谣言沉默者 Rn（自然停止率 α）
-  - 官方辟谣号（T）在 t=6 上线，传播真相（率 δ）：
-    易感者获知真相即免疫（Rt），传谣者听到真相停止传谣（概率 γ 转为辟谣传播者）
-- 随机流隔离：网络结构、素养分型、谣言、真相独立 seed；
-  A/B 两组介入前传播轨迹**逐事件一致**（程序自动验证）
+24 persona agents (media literacy × emotion × social habit × identity) each decide — through a **locally-hosted LLM** (Ollama, `qwen3:4b-instruct-2507`) — what to do with a *fictional* campus rumor, across two rounds:
 
-## 复现步骤
+| Round | Stimulus | Measured behavior |
+|---|---|---|
+| 1 | rumor only | reshare rate: **low-literacy 50% vs. high-literacy 0%** — every high-literacy agent chose to fact-check |
+| 2 | official rebuttal | **6 / 6 forwarders switched to re-sharing the debunk** |
+
+The measured behavioral gap is injected into the network as **heterogeneous per-node transmission tendencies** under a conservation-scaling protocol: heterogeneity comes from the experiment, overall pacing stays a controlled parameter.
+
+### Layer 1 · network simulation — `src/simulate.py`
+
+- **BA scale-free network** (N = 3,000, m = 3); the rumor source is an *ordinary* node (degree ≈ 24) — anyone's single share
+- MT rumor-model variant with **competing truth**: Ignorant → rumor spreader → stifler; official sources (top-degree hubs) activate at t = 6; truth immunizes the ignorant and "cures" spreaders, some of whom become truth spreaders themselves
+- **Random-stream isolation**: network, literacy typing, rumor and truth each use an independent seed — the A/B trajectories are **event-for-event identical before intervention**, verified automatically on every run
+
+### Rendering & composition — `src/render.py`, `src/compose.py`
+
+Radial tree layout (BFS depth = ring, sunburst-style angular allocation), polar-interpolation arcs with tapered width (thick trunk → thin tips), depth-based color ramps (white-hot core → deep red; deep blue → clear cyan) and a three-pass glow. The typography layer reads live statistics from the simulation output — re-run the simulation and every caption updates itself.
+
+## Results (seed-locked, one-command reproducible)
+
+| Group | Attack rate | Rumor radius | Peak concurrent spreaders |
+|---|---|---|---|
+| A · no debunking | **77.9%** (2,336 / 3,000) | 13 rings | 834 (t = 13) |
+| B · debunking at t = 6 | **18.7%** (560 / 3,000) | 10 rings | 204 (t = 6) — truth reached 1,974 nodes |
+
+Seeds: network `42` · literacy typing `88` · rumor stream `2026` · truth stream `2027`.
+
+## Reproduce
 
 ```bash
 pip install numpy networkx pyyaml matplotlib pillow
-ollama pull qwen3:4b-instruct-2507-q4_K_M   # 本地大模型（Layer 2）
-python src/llm_calibration.py  # LLM 多智能体行为校准 → data/llm_calibration.json
-python src/simulate.py         # 校准行为注入 + A/B 对照仿真 → data/
-python src/render.py           # 径向生成艺术画布 300dpi → output/render_dual.png
-python src/compose.py          # 海报排版合成 → release/poster_一次转发的半径.png
+ollama pull qwen3:4b-instruct-2507-q4_K_M   # local LLM for Layer 2
+python src/llm_calibration.py   # LLM persona-agent experiments → data/llm_calibration.json
+python src/simulate.py          # calibrated A/B simulation → data/
+python src/render.py            # radial generative canvas → output/render_dual.png
+python src/compose.py           # poster typography → release/
 ```
 
-## 交付物（release/）
+## Repository layout
 
-- `poster_一次转发的半径.png` — 参赛海报成片（3508×4961 @300dpi、RGB、2.6MB ≤10M）
-- `《一次转发的半径》班级张子睿.png / .docx / .zip` — 按比赛命名规范的提交包
-  （**"班级"字段为占位符，提交前请按实际班级改名**，邮件主题同理）
-- 字体：思源黑体 CN（SIL OFL 免费商用），位于 `assets/fonts/`（不入库），
-  来源 https://github.com/adobe-fonts/source-han-sans/releases （SubsetOTF/CN，可用 jsdelivr 加速）
+```
+├── PLAN.md                  # project plan (contact info redacted)
+├── README.md                # this file
+├── README.zh-CN.md          # Chinese documentation
+├── src/
+│   ├── config.yaml          # every parameter & seed lives here
+│   ├── simulate.py          # Layer 1 · rumor–truth competition on a BA network
+│   ├── llm_calibration.py   # Layer 2 · LLM persona-agent experiments
+│   ├── render.py            # radial generative rendering
+│   └── compose.py           # poster typography
+├── data/                    # simulation event tables & statistics (JSON)
+└── release/                 # final artwork (submission package stays local)
+```
 
-## 最终数据（seed 锁定，可一键复现）
+## Notes
 
-- 网络结构 seed=42，素养分型 seed=88，谣言随机流 seed=2026，真相随机流 seed=2027
-- **A 组（无辟谣）**：感染率 **77.9%**（2336/3000），谣言半径 **13 环**，峰值传播者 834（t=13）
-- **B 组（辟谣介入 t=6）**：感染率 **18.7%**（560/3000），谣言半径 **10 环**，峰值 204（t=6），真相触达 1974 人
-- 结论：辟谣抢在感染峰值前介入，感染率降至原来的 1/4 —— 转发即扩散，理性是防火墙
+- Fonts: Source Han Sans CN (SIL OFL, free for commercial use) — not committed; download note in the [Chinese README](README.zh-CN.md).
+- The competition submission package (docx / zip) contains personal contact information and is intentionally kept out of this public repository.
 
-## 提交清单
+---
 
-见 `PLAN.md` 第六节。作品命名：《一次转发的半径》+ 班级 + 姓名（张子睿）。
+**Zirui (Ruige) Zhang** · Industrial Design (Information & Interaction Design) + CS minor, South China University of Technology · [github.com/hellobs](https://github.com/hellobs)
