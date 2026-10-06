@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 中间渲染产物（只入库 release/ 最终稿）
+output/
+
+# 字体体积大，不入库；README 记录下载来源
+assets/fonts/
+
+# 提交包（含联系方式，不入公共仓库）
+release/《*
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
