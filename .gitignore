@@ -9,8 +9,11 @@ output/
 # 字体体积大，不入库；README 记录下载来源
 assets/fonts/
 
-# 提交包（含联系方式，不入公共仓库）
-release/《*
+# 提交包（zip 与简介 docx 含联系方式，不入公共仓库）
+release/*.zip
+release/*.docx
+# 构建产物（compose.py 输出，入库以正式命名的成片为准）
+release/poster_*.png
 
 # 系统
 .DS_Store
