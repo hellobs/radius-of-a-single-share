@@ -1,0 +1,275 @@
+{
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "timestamp": "2026-10-06T16:00:34",
+  "n_personas": 24,
+  "rumor_text": "【网传】临江大学二食堂后厨被曝使用合成肉，已有数十名学生食物中毒住院，校方疑似封锁消息！转起来让更多人看到！",
+  "rebuttal_text": "【临江大学官方通报】经属地市场监管部门与校方联合核查：二食堂本周食材抽检全部合格，网传“合成肉”“学生集体中毒”均为不实信息，首发造谣账号已被依法处置。请师生不信谣、不传谣。",
+  "round1": [
+    {
+      "action": "question",
+      "confidence": 0.95,
+      "reason": "网传信息涉及学生健康安全，需核实信源和官方通报，避免情绪化转发引发误传",
+      "parse_ok": true,
+      "id": 0,
+      "literacy": "高素养"
+    },
+    {
+      "action": "forward",
+      "confidence": 0.9,
+      "reason": "看到愤怒的内容会立刻激动，本能想扩散以引起关注",
+      "parse_ok": true,
+      "id": 1,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.98,
+      "reason": "网传信息缺乏具体信源和官方通报，需先核实真实性再决定是否扩散",
+      "parse_ok": true,
+      "id": 2,
+      "literacy": "高素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.8,
+      "reason": "作为教师，我虽不专业，但会先核实信息真实性，避免误传误导学生",
+      "parse_ok": true,
+      "id": 3,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.95,
+      "reason": "网传信息缺乏具体信源和官方通报，我需先核实真实性，避免传播未经证实的内容。",
+      "parse_ok": true,
+      "id": 4,
+      "literacy": "高素养"
+    },
+    {
+      "action": "forward",
+      "confidence": 0.85,
+      "reason": "看到愤怒的内容会激动，情绪被煽动，本能想让更多人看到",
+      "parse_ok": true,
+      "id": 5,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.98,
+      "reason": "未见权威信源或官方通报，信息缺乏具体证据，需先核实真实性",
+      "parse_ok": true,
+      "id": 6,
+      "literacy": "高素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.8,
+      "reason": "看到类似消息会先确认真实性，避免无根据传播",
+      "parse_ok": true,
+      "id": 7,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.9,
+      "reason": "作为银行职员，我接受过媒介素养训练，必须先核查信源真实性，避免无根据转发引发网络舆情恐慌。",
+      "parse_ok": true,
+      "id": 8,
+      "literacy": "高素养"
+    },
+    {
+      "action": "forward",
+      "confidence": 0.9,
+      "reason": "看到学生食物中毒的消息我立刻被激怒，觉得必须让更多人看到，不然谁来为他们发声",
+      "parse_ok": true,
+      "id": 9,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.98,
+      "reason": "作为退休返聘会计，我习惯核查信源，此类涉及健康安全的事件需等待官方通报，不能凭网传信息轻易转发或判断。",
+      "parse_ok": true,
+      "id": 10,
+      "literacy": "高素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.85,
+      "reason": "我虽热衷转发热点，但作为健身教练，更关注事实准确性，不能仅凭直觉传播未经验证的信息。",
+      "parse_ok": true,
+      "id": 11,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.95,
+      "reason": "该信息未提供具体信源，且涉及重大健康安全问题，需先核实事实，避免情绪化传播",
+      "parse_ok": true,
+      "id": 12,
+      "literacy": "高素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.7,
+      "reason": "看到疑似食物中毒和信息封锁的指控，我本能感到紧张，但作为理工科学生，我意识到需要先核实信息来源和证据，不能仅凭情绪判断",
+      "parse_ok": true,
+      "id": 13,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.98,
+      "reason": "未见官方通报或权威信源，信息来源不明，需先核实真实性",
+      "parse_ok": true,
+      "id": 14,
+      "literacy": "高素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.85,
+      "reason": "我虽不常参与讨论，但会先核实信息真实性，避免误传情绪化内容。",
+      "parse_ok": true,
+      "id": 15,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.9,
+      "reason": "作为接受过媒介素养训练的店员，我需核查信源真实性，避免未经证实的信息引发群体情绪波动",
+      "parse_ok": true,
+      "id": 16,
+      "literacy": "高素养"
+    },
+    {
+      "action": "forward",
+      "confidence": 0.9,
+      "reason": "看到愤怒内容立刻被煽动，本能想转发让更多人看到",
+      "parse_ok": true,
+      "id": 17,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.98,
+      "reason": "未见官方通报，信息来源不明，需先核查信源真实性",
+      "parse_ok": true,
+      "id": 18,
+      "literacy": "高素养"
+    },
+    {
+      "action": "forward",
+      "confidence": 0.8,
+      "reason": "看到学生食物中毒的传言，心里一紧，觉得必须让更多人知道，所以立刻转发",
+      "parse_ok": true,
+      "id": 19,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.95,
+      "reason": "作为银行职员，我接受过媒介素养训练，必须先核查信源真实性，避免未经证实的信息引发情绪波动或误传。",
+      "parse_ok": true,
+      "id": 20,
+      "literacy": "高素养"
+    },
+    {
+      "action": "forward",
+      "confidence": 0.9,
+      "reason": "看到学生食物中毒的新闻立刻被情绪煽动，本能想让更多人看到",
+      "parse_ok": true,
+      "id": 21,
+      "literacy": "低素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.98,
+      "reason": "未见官方通报，信息来源不明，需核实信源真实性与事件细节",
+      "parse_ok": true,
+      "id": 22,
+      "literacy": "高素养"
+    },
+    {
+      "action": "question",
+      "confidence": 0.9,
+      "reason": "我作为健身教练，虽不常参与舆论，但会用理性判断信息真伪，先求证再行动",
+      "parse_ok": true,
+      "id": 23,
+      "literacy": "低素养"
+    }
+  ],
+  "round2": [
+    {
+      "action": "forward_rebuttal",
+      "confidence": 0.9,
+      "reason": "看到官方澄清后，我意识到自己之前转发的信息是错误的，应该用权威信息纠正误解，避免传播谣言。",
+      "parse_ok": true,
+      "id": 1,
+      "literacy": "低素养"
+    },
+    {
+      "action": "forward_rebuttal",
+      "confidence": 0.95,
+      "reason": "官方已明确辟谣，我作为摄影师虽缺乏媒介素养，但看到真相仍应传递，避免误导他人。",
+      "parse_ok": true,
+      "id": 5,
+      "literacy": "低素养"
+    },
+    {
+      "action": "forward_rebuttal",
+      "confidence": 0.9,
+      "reason": "看到官方通报后意识到自己之前转发的内容是虚假信息，为避免误导他人，选择转发辟谣以纠正错误",
+      "parse_ok": true,
+      "id": 9,
+      "literacy": "低素养"
+    },
+    {
+      "action": "forward_rebuttal",
+      "confidence": 0.95,
+      "reason": "看到官方辟谣后意识到自己之前转发的内容是虚假的，作为负责任的社交用户应当纠正错误信息。",
+      "parse_ok": true,
+      "id": 17,
+      "literacy": "低素养"
+    },
+    {
+      "action": "forward_rebuttal",
+      "confidence": 0.95,
+      "reason": "官方已明确辟谣，传播不实信息会误导他人，我作为社交用户有责任纠正错误信息。",
+      "parse_ok": true,
+      "id": 19,
+      "literacy": "低素养"
+    },
+    {
+      "action": "forward_rebuttal",
+      "confidence": 0.95,
+      "reason": "看到官方通报后意识到原信息是虚假的，作为自媒体博主有责任纠正错误信息，避免误导公众。",
+      "parse_ok": true,
+      "id": 21,
+      "literacy": "低素养"
+    }
+  ],
+  "aggregates": {
+    "round1": {
+      "forward_rate": 0.25,
+      "forward_rate_literate": 0.0,
+      "forward_rate_illiterate": 0.5,
+      "question_rate": 0.75,
+      "rebut_rate": 0.0,
+      "ignore_rate": 0.0
+    },
+    "round2": {
+      "respondents": 6,
+      "keep_rate": 0.0,
+      "delete_rate": 0.0,
+      "rebut_forward_rate": 1.0,
+      "ignore_rate": 0.0
+    },
+    "estimates": {
+      "lambda_ratio_lo_hi": null,
+      "gamma_overall": 1.0,
+      "gamma_literate": null,
+      "gamma_illiterate": 1.0,
+      "delta_proxy": 1.0
+    }
+  }
+}

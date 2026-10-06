@@ -1,0 +1,48 @@
+# ============================================================
+# 《一次转发的半径》—— 仿真与渲染总配置
+# 所有可调参数集中于此；最终提交以本文件锁定的 seed 为准
+# ============================================================
+
+project:
+  title: 一次转发的半径
+  author: 张子睿
+
+network:
+  type: barabasi_albert     # BA 无标度网络（枢纽结构，接近真实社交网络）
+  n: 3000                   # 节点数（网民）
+  m: 3                      # 每个新节点连接数
+  seed: 42                  # 网络结构随机种子（A/B 共用同一拓扑）
+
+model:
+  lambda: 0.15              # 谣言平均传播率（行为注入时作总量守恒缩放基准）
+  alpha: 0.15               # 自然沉默率：传播者每步停止传谣的概率
+  delta: 0.65               # 真相传播率：辟谣号-T 接触易感者的免疫概率
+  gamma: 0.70               # 治愈转化率：传谣者听到真相后转为辟谣传播者的概率
+  steps: 80                 # 仿真总步数
+
+seed_node:
+  strategy: 24              # 整数 = 选度最接近该值的普通用户首发（"任何人的一次转发"）
+
+debunk:
+  count: 6                  # 官方辟谣号数量
+  strategy: top_degree      # 取次级枢纽节点（官方大号）
+  activate_t: 6             # 辟谣介入时间步（抢在感染峰值 t=13 之前）
+
+llm:                        # Layer 2：LLM 多智能体校准实验（Ollama OpenAI 兼容接口）
+  base_url: http://127.0.0.1:11434/v1
+  model: qwen3:4b-instruct-2507-q4_K_M   # 本地已拉取；如换模型请同步修改
+  personas: 24              # 虚拟网民数量
+  temperature: 0.7
+  max_tokens: 120
+
+poster:                     # 供 render/compose 使用
+  width_px: 3508            # A3 竖版 @300dpi
+  height_px: 4961
+  dpi: 300
+  color_rumor: "#E8552F"    # 谣言：警示橙红
+  color_truth: "#1B6BB0"    # 真相：清朗蓝
+
+reproducibility:
+  rumor_seed: 2026          # 谣言传播随机流（A/B 一致 → 介入前轨迹逐事件相同）
+  truth_seed: 2027          # 真相传播随机流（仅 B 组消耗）
+  type_seed: 88             # 节点素养分型随机种子（Layer 2 → Layer 1 注入）
